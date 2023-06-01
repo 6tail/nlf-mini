@@ -53,27 +53,14 @@ public class Bean extends AbstractBean implements Map<String, Object> {
   }
 
   /**
-   * 获取Object值，可能返回null
-   *
-   * @param key   键
-   * @param klass 指定返回类型
-   * @return 值
-   */
-  @SuppressWarnings("unchecked")
-  public <E> E get(String key, Class<E> klass) {
-    return (E) values.get(key);
-  }
-
-  /**
    * 获取Object值，如果为null,返回默认值
    *
    * @param key          键
-   * @param klass        指定返回类型
    * @param defaultValue 默认值
    * @return 值
    */
   @SuppressWarnings("unchecked")
-  public <E> E get(String key, Class<E> klass, E defaultValue) {
+  public <E> E get(String key, E defaultValue) {
     Object o = values.get(key);
     return null == o ? defaultValue : (E) o;
   }
@@ -187,9 +174,11 @@ public class Bean extends AbstractBean implements Map<String, Object> {
       if (p.contains("[") && p.contains("]")) {
         String key = StringUtil.left(p, "[");
         int index = Integer.parseInt(StringUtil.between(p, "[", "]"));
-        node = node.getList(key, Bean.class).get(index);
+        List<Bean> nodes = node.getList(key);
+        node = nodes.get(index);
       } else {
-        node = node.getList(p, Bean.class).get(0);
+        List<Bean> nodes = node.getList(p);
+        node = nodes.get(0);
       }
     }
     if (leaf.contains("[") && leaf.contains("]")) {
@@ -485,7 +474,7 @@ public class Bean extends AbstractBean implements Map<String, Object> {
    */
   @SuppressWarnings("unchecked")
   public <T> List<T> getList(String key) {
-    List<T> l = new ArrayList<T>();
+    List<T> l = new ArrayList<>();
     Object o = values.get(key);
     if (null == o) {
       return l;
@@ -506,7 +495,7 @@ public class Bean extends AbstractBean implements Map<String, Object> {
    */
   @SuppressWarnings("unchecked")
   public <T> List<T> selectList(String path) {
-    List<T> l = new ArrayList<T>();
+    List<T> l = new ArrayList<>();
     Object o = select(path);
     if (null == o) {
       return l;
@@ -515,50 +504,6 @@ public class Bean extends AbstractBean implements Map<String, Object> {
       l.addAll((Collection<T>) o);
     } else {
       l.add((T) o);
-    }
-    return l;
-  }
-
-  /**
-   * 强制获取List，即使是非Collection，也会强制返回只有1个元素的List。如果不存在该键，返回0个元素的List。
-   *
-   * @param key   键
-   * @param klass 指定的返回类型
-   * @return List
-   */
-  @SuppressWarnings("unchecked")
-  public <E> List<E> getList(String key, Class<E> klass) {
-    List<E> l = new ArrayList<E>();
-    Object o = values.get(key);
-    if (null == o) {
-      return l;
-    }
-    if (o instanceof Collection) {
-      l.addAll((Collection<E>) o);
-    } else {
-      l.add((E) o);
-    }
-    return l;
-  }
-
-  /**
-   * 强制获取List，即使是非Collection，也会强制返回只有1个元素的List。如果不存在该键，返回0个元素的List。
-   *
-   * @param path  键的路径，例如：a.b.c或a.b[0].c
-   * @param klass 指定的返回类型
-   * @return List
-   */
-  @SuppressWarnings("unchecked")
-  public <E> List<E> selectList(String path, Class<E> klass) {
-    List<E> l = new ArrayList<E>();
-    Object o = select(path);
-    if (null == o) {
-      return l;
-    }
-    if (o instanceof Collection) {
-      l.addAll((Collection<E>) o);
-    } else {
-      l.add((E) o);
     }
     return l;
   }

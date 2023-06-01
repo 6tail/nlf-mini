@@ -175,7 +175,7 @@ public class MathUtil {
   }
 
   public static byte[] merge(byte[]... arrays) {
-    byte[] t = null;
+    byte[] t;
     ByteArrayOutputStream os = new ByteArrayOutputStream();
     try {
       for (byte[] b : arrays) {

@@ -8,7 +8,7 @@ nlf-mini是 [nlf2](https://github.com/6tail/nlf2-maven) 的简化版，主要优
 <dependency>
   <groupId>cn.6tail</groupId>
   <artifactId>nlf-mini</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 

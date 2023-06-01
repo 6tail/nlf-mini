@@ -13,7 +13,7 @@ public class FileUtil {
   /**
    * 文件BOM头
    */
-  public static Map<String, byte[]> BOM = new HashMap<String, byte[]>();
+  public static Map<String, byte[]> BOM = new HashMap<>();
 
   static {
     BOM.put("utf-8", new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF});
@@ -90,7 +90,7 @@ public class FileUtil {
     try {
       bos = new BufferedOutputStream(new FileOutputStream(file));
       byte[] buffer = new byte[IOUtil.BUFFER_SIZE];
-      int l = 0;
+      int l;
       while ((l = inputStream.read(buffer)) != -1) {
         bos.write(buffer, 0, l);
       }

@@ -241,17 +241,15 @@ public class DefaultScanner extends AbstractScanner {
       App.I18N_RESOURCE.add(ir);
       App.I18N.add(name);
     } else if (fileName.endsWith(SUF_CLASS) && !fileName.contains("$")) {
-      String s = null;
       try {
-        s = FileUtil.readAsText(file);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      if (null != s && s.contains(PLUGIN_INTERFACE_NAME) && s.contains(PLUGIN_APPLY_NAME)) {
-        String name = fileName.substring(0, fileName.lastIndexOf(".")).replace(File.separator, ".");
-        if (!ignoreClasses.contains(name)) {
-          App.plugins.add(name);
+        String s = FileUtil.readAsText(file);
+        if (s.contains(PLUGIN_INTERFACE_NAME) && s.contains(PLUGIN_APPLY_NAME)) {
+          String name = fileName.substring(0, fileName.lastIndexOf(".")).replace(File.separator, ".");
+          if (!ignoreClasses.contains(name)) {
+            App.plugins.add(name);
+          }
         }
+      } catch (IOException ignore) {
       }
     }
   }
@@ -283,17 +281,15 @@ public class DefaultScanner extends AbstractScanner {
           App.I18N_RESOURCE.add(ir);
           App.I18N.add(name);
         } else if (fileName.endsWith(SUF_CLASS) && !fileName.contains("$")) {
-          String s = null;
           try {
-            s = FileUtil.readAsText(zip.getInputStream(entry), CHARSET);
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
-          if (null != s && s.contains(PLUGIN_INTERFACE_NAME) && s.contains(PLUGIN_APPLY_NAME)) {
-            String name = fileName.substring(0, fileName.lastIndexOf(".")).replace(File.separator, ".");
-            if (!ignoreClasses.contains(name)) {
-              App.plugins.add(name);
+            String s = FileUtil.readAsText(zip.getInputStream(entry), CHARSET);
+            if (s.contains(PLUGIN_INTERFACE_NAME) && s.contains(PLUGIN_APPLY_NAME)) {
+              String name = fileName.substring(0, fileName.lastIndexOf(".")).replace("/", ".");
+              if (!ignoreClasses.contains(name)) {
+                App.plugins.add(name);
+              }
             }
+          } catch (IOException ignore) {
           }
         }
       }

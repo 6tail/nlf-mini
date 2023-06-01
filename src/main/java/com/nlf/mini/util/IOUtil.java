@@ -23,7 +23,7 @@ public class IOUtil {
   public static void writeFile(File file, byte[] data, boolean append) throws IOException {
     BufferedOutputStream out = null;
     try {
-      out = new BufferedOutputStream(new FileOutputStream(file, true));
+      out = new BufferedOutputStream(new FileOutputStream(file, append));
       out.write(data);
       out.flush();
     } finally {
