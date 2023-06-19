@@ -242,6 +242,40 @@ public class Bean extends AbstractBean implements Map<String, Object> {
     return null == v ? defaultValue : v;
   }
 
+  protected byte[] convertBytes(Object v, byte[] defaultValue) {
+    try {
+      if (v instanceof byte[]) {
+        return (byte[])v;
+      } else if (v instanceof String) {
+        return (byte[])convertBytes(v);
+      }
+    } catch (Exception ignore) {
+    }
+    return defaultValue;
+  }
+
+  /**
+   * 获取byte[]值，如果获取不到或出错，返回默认值，不抛出异常
+   *
+   * @param key          键
+   * @param defaultValue 默认值
+   * @return 值
+   */
+  public byte[] getBytes(String key, byte[] defaultValue) {
+    return convertBytes(values.get(key), defaultValue);
+  }
+
+  /**
+   * 根据路径获取short值，如果获取不到或出错，返回默认值，不抛出异常
+   *
+   * @param path         键的路径，例如：a.b.c或a.b[0].c
+   * @param defaultValue 默认值
+   * @return 值
+   */
+  public byte[] selectBytes(String path, byte[] defaultValue) {
+    return convertBytes(select(path), defaultValue);
+  }
+
   /**
    * 获取short值，如果获取不到或出错，返回默认值，不抛出异常
    *

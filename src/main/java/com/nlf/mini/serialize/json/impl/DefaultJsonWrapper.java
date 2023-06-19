@@ -50,7 +50,7 @@ public class DefaultJsonWrapper extends AbstractWrapper {
     return wrapString(Base64Util.encode(d));
   }
 
-  protected String buildString(StringBuilder s, String prefix, String suffix) {
+  protected String buildArrayString(StringBuilder s) {
     if (s.length() > 0) {
       s.deleteCharAt(0);
     }
@@ -66,7 +66,7 @@ public class DefaultJsonWrapper extends AbstractWrapper {
       s.append(",");
       s.append(n);
     }
-    return buildString(s, "[", "]");
+    return buildArrayString(s);
   }
 
   protected String wrapIntArray(Object o) {
@@ -76,7 +76,7 @@ public class DefaultJsonWrapper extends AbstractWrapper {
       s.append(",");
       s.append(n);
     }
-    return buildString(s, "[", "]");
+    return buildArrayString(s);
   }
 
   protected String wrapLongArray(Object o) {
@@ -86,7 +86,7 @@ public class DefaultJsonWrapper extends AbstractWrapper {
       s.append(",");
       s.append(n);
     }
-    return buildString(s, "[", "]");
+    return buildArrayString(s);
   }
 
   protected String wrapFloatArray(Object o) {
@@ -96,7 +96,7 @@ public class DefaultJsonWrapper extends AbstractWrapper {
       s.append(",");
       s.append(n);
     }
-    return buildString(s, "[", "]");
+    return buildArrayString(s);
   }
 
   protected String wrapDoubleArray(Object o) {
@@ -106,7 +106,7 @@ public class DefaultJsonWrapper extends AbstractWrapper {
       s.append(",");
       s.append(n);
     }
-    return buildString(s, "[", "]");
+    return buildArrayString(s);
   }
 
   protected String wrapArray(Object o) {
@@ -134,7 +134,7 @@ public class DefaultJsonWrapper extends AbstractWrapper {
       s.append(",");
       s.append(wrap(obj));
     }
-    return buildString(s, "[", "]");
+    return buildArrayString(s);
   }
 
   protected String wrapEnumeration(Object o) {
@@ -144,7 +144,7 @@ public class DefaultJsonWrapper extends AbstractWrapper {
       s.append(",");
       s.append(wrap(l.nextElement()));
     }
-    return buildString(s, "[", "]");
+    return buildArrayString(s);
   }
 
   protected String wrapMap(Object o) {

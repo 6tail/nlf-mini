@@ -1,6 +1,7 @@
 package com.nlf.mini.core;
 
 import com.nlf.mini.Bean;
+import com.nlf.mini.util.Base64Util;
 import com.nlf.mini.util.DataTypes;
 
 import java.beans.IntrospectionException;
@@ -10,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -20,6 +22,7 @@ import java.util.*;
 public abstract class AbstractBean implements Serializable {
 
   private static final String TYPE_CLASS_PREFIX = "class [";
+  private static final String TYPE_BYTES_PREFIX = "class [B";
 
   protected Object convertString(String object, String type) {
     Object value = object;
@@ -35,8 +38,24 @@ public abstract class AbstractBean implements Serializable {
       value = Float.parseFloat(object);
     } else if (DataTypes.DOUBLE.equals(type)) {
       value = Double.parseDouble(object);
+    } else if (type.startsWith(TYPE_BYTES_PREFIX)) {
+      value = convertBytes(object);
     }
     return value;
+  }
+
+  protected Object convertBytes(Object v) {
+    if (v instanceof String) {
+      String s = (String) v;
+      if (Base64Util.isBase64(s)) {
+        try {
+          return Base64Util.decode((String) v);
+        } catch (Exception ignore) {}
+      } else {
+        return s.getBytes(StandardCharsets.UTF_8);
+      }
+    }
+    return v;
   }
 
   protected Object convertInteger(int object, String type) {
