@@ -186,7 +186,7 @@ public class Bean extends AbstractBean implements Map<String, Object> {
       int index = Integer.parseInt(StringUtil.between(leaf, "[", "]"));
       return (T) (node.getList(key).get(index));
     } else {
-      return (T) (node.getList(leaf).get(0));
+      return node.get(leaf);
     }
   }
 

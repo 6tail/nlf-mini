@@ -6,7 +6,7 @@
 
     <groupId>cn.6tail</groupId>
     <artifactId>nlf-mini</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/6tail/nlf-mini</url>
     <description>a lightweight java framework</description>

@@ -195,6 +195,7 @@ public class DefaultScanner extends AbstractScanner {
       }
       scan();
       buildI18n();
+      App.profile = App.getProperty("nlf.profile.active");
     } catch (Exception e) {
       throw new NlfException(e);
     }
@@ -202,12 +203,24 @@ public class DefaultScanner extends AbstractScanner {
   }
 
   protected void buildI18n() {
-    if (App.I18N.size() > 1) {
-      List<String> l = new ArrayList<>(App.I18N);
-      l.sort(i18nComparator);
-      App.I18N.clear();
-      App.I18N.addAll(l);
+    List<String> l = new ArrayList<>(App.I18N.size());
+    for (String name : App.I18N) {
+      boolean matched = false;
+      String baseName = name;
+      while (baseName.contains("-")) {
+        baseName = baseName.substring(0, baseName.lastIndexOf("-"));
+        if (App.I18N.contains(baseName)) {
+          matched = true;
+          break;
+        }
+      }
+      if (!matched && !l.contains(name)) {
+        l.add(name);
+      }
     }
+    l.sort(i18nComparator);
+    App.I18N.clear();
+    App.I18N.addAll(l);
   }
 
   protected void scanClasses(File file, String root) {

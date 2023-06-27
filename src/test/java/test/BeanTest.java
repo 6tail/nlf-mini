@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BeanTest {
   @Test
@@ -44,6 +46,29 @@ public class BeanTest {
     Bean o = JSON.toBean(s);
     B b = o.toObject(B.class);
     Assert.assertEquals("AQID", b.getBytes());
+  }
+
+  @Test
+  public void test5() {
+    List<String> c = new ArrayList<>();
+    c.add("1");
+    c.add("2");
+    Bean o = new Bean("a", new Bean("b", c));
+    Assert.assertEquals(c, o.selectList("a.b"));
+  }
+
+  @Test
+  public void test6() {
+    List<String> c = new ArrayList<>();
+    c.add("1");
+    Bean o = new Bean("a", new Bean("b", "1"));
+    Assert.assertEquals(c, o.selectList("a.b"));
+  }
+
+  @Test
+  public void test7() {
+    Bean o = new Bean("a", new Bean("b", "1"));
+    Assert.assertEquals("1", o.select("a.b"));
   }
 
   public static class A {

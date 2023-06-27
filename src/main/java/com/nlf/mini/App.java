@@ -27,6 +27,7 @@ import com.nlf.mini.resource.klass.comparator.ClassComparator;
 import com.nlf.mini.serialize.json.impl.DefaultJsonParser;
 import com.nlf.mini.serialize.json.impl.DefaultJsonWrapper;
 
+import java.text.MessageFormat;
 import java.util.*;
 
 /**
@@ -48,6 +49,11 @@ public class App {
    * 框架所在路径，可能是目录，也可能是jar文件
    */
   public static String frame;
+
+  /**
+   * 环境配置
+   */
+  public static String profile;
 
   private static final String OBJECT_CLASS_NAME = Object.class.getName();
 
@@ -72,11 +78,6 @@ public class App {
    * 所有扫描到的i18n缓存
    */
   public static final List<I18nResource> I18N_RESOURCE = new ArrayList<>();
-  /**
-   * i18n值缓存
-   */
-  protected static final Map<String, Map<Locale, String>> I18N_CACHE = new HashMap<>();
-
   /**
    * 类比较器
    */
@@ -185,21 +186,22 @@ public class App {
    */
   public static String getProperty(Locale locale, String key, Object... params) {
     String value = null;
-    Map<Locale, String> values = I18N_CACHE.computeIfAbsent(key, k -> new HashMap<>(2));
-    if (!values.containsKey(locale)) {
-      for (String i18n : I18N) {
-        try {
-          ResourceBundle rb = ResourceBundle.getBundle(i18n, locale);
-          value = rb.getString(key);
-          break;
-        } catch (Exception ignored) {
-        }
+    String baseName = null;
+    for (String i18n : I18N) {
+      try {
+        value = ResourceBundle.getBundle(i18n, locale).getString(key);
+        baseName = i18n;
+        break;
+      } catch (Exception ignored) {
       }
-      values.put(locale, value);
-    } else {
-      value = values.get(locale);
     }
-    return null == value ? null : params.length > 0 ? java.text.MessageFormat.format(value, params) : value;
+    if (null != profile && null != baseName) {
+      try {
+        value = ResourceBundle.getBundle(baseName + "-" + profile, locale).getString(key);
+      } catch (Exception ignored) {
+      }
+    }
+    return null == value ? null : params.length > 0 ? MessageFormat.format(value, params) : value;
   }
 
   /**
