@@ -17,7 +17,7 @@ import java.util.*;
  *
  * @author 6tail
  */
-public class Bean extends AbstractBean implements Map<String, Object> {
+public class Bean extends AbstractBean implements Map<String, Object>, Cloneable {
   private static final long serialVersionUID = 1;
   /**
    * 键值对
@@ -150,6 +150,22 @@ public class Bean extends AbstractBean implements Map<String, Object> {
     return values.toString();
   }
 
+  @Override
+  public Bean clone() {
+    Bean o = new Bean();
+    for (Entry<String, Object> entry : values.entrySet()) {
+      Object v = entry.getValue();
+      if (null == v) {
+        o.set(entry.getKey(), null);
+      } else if (v instanceof Bean) {
+        o.set(entry.getKey(), ((Bean)v).clone());
+      } else {
+        o.set(entry.getKey(), v);
+      }
+    }
+    return o;
+  }
+
   /**
    * 获取值
    * <p>
@@ -245,9 +261,9 @@ public class Bean extends AbstractBean implements Map<String, Object> {
   protected byte[] convertBytes(Object v, byte[] defaultValue) {
     try {
       if (v instanceof byte[]) {
-        return (byte[])v;
+        return (byte[]) v;
       } else if (v instanceof String) {
-        return (byte[])convertBytes(v);
+        return (byte[]) convertBytes(v);
       }
     } catch (Exception ignore) {
     }
@@ -589,4 +605,21 @@ public class Bean extends AbstractBean implements Map<String, Object> {
   public void clear() {
     values.clear();
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Bean)) {
+      return false;
+    }
+    return Objects.equals(values, ((Bean) o).values);
+  }
+
+  @Override
+  public int hashCode() {
+    return values.hashCode();
+  }
+
 }

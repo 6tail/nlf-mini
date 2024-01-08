@@ -3,8 +3,8 @@ package com.nlf.mini.extend.dao.sql.dbType.mysql;
 import com.nlf.mini.Bean;
 import com.nlf.mini.dao.paging.PageData;
 import com.nlf.mini.extend.dao.sql.dbType.common.ASqlTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.nlf.mini.logger.ILogger;
+import com.nlf.mini.logger.LoggerFactory;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MysqlTemplate extends ASqlTemplate{
 
-  private static final Logger logger = LoggerFactory.getLogger(MysqlTemplate.class);
+  private static final ILogger logger = LoggerFactory.getLogger(MysqlTemplate.class);
 
   @Override
   public boolean support(String dbType){

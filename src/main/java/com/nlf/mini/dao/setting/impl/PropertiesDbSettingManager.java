@@ -6,9 +6,9 @@ import com.nlf.mini.dao.exception.DaoException;
 import com.nlf.mini.dao.setting.IDbSetting;
 import com.nlf.mini.dao.setting.IDbSettingManager;
 import com.nlf.mini.dao.setting.IDbSettingProvider;
+import com.nlf.mini.logger.ILogger;
+import com.nlf.mini.logger.LoggerFactory;
 import com.nlf.mini.util.StringUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class PropertiesDbSettingManager implements IDbSettingManager {
 
-  private static final Logger logger = LoggerFactory.getLogger(PropertiesDbSettingManager.class);
+  private static final ILogger logger = LoggerFactory.getLogger(PropertiesDbSettingManager.class);
 
   public static final String KEY_TYPE = "type";
   public static final String KEY_ALIAS = "alias";

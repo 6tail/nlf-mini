@@ -2,13 +2,15 @@ package com.nlf.mini.dao;
 
 import com.nlf.mini.dao.transaction.ITransaction;
 
+import java.io.Closeable;
+
 /**
  * Dao接口
  * 
  * @author 6tail
  *
  */
-public interface IDao{
+public interface IDao extends Closeable {
   /**
    * 获取DB别名
    * 
@@ -37,5 +39,8 @@ public interface IDao{
    */
   ITransaction beginTransaction();
 
+  /**
+   * 关闭
+   */
   void close();
 }

@@ -69,6 +69,7 @@ public class BeanTest {
   public void test7() {
     Bean o = new Bean("a", new Bean("b", "1"));
     Assert.assertEquals("1", o.select("a.b"));
+    Assert.assertEquals(new Bean("b", "1"), o.select("a"));
   }
 
   public static class A {

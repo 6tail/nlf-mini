@@ -7,8 +7,8 @@ import com.nlf.mini.dao.paging.PageData;
 import com.nlf.mini.extend.dao.sql.AbstractSqlExecuter;
 import com.nlf.mini.extend.dao.sql.ISqlTemplate;
 import com.nlf.mini.extend.dao.sql.SqlConnection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.nlf.mini.logger.ILogger;
+import com.nlf.mini.logger.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ import java.util.Map.Entry;
  */
 public class ASqlTemplate extends AbstractSqlExecuter implements ISqlTemplate{
 
-  private static final Logger logger = LoggerFactory.getLogger(ASqlTemplate.class);
+  private static final ILogger logger = LoggerFactory.getLogger(ASqlTemplate.class);
 
   protected List<String> sqls = new ArrayList<String>();
   protected Bean param = new Bean();

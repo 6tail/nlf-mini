@@ -4,10 +4,10 @@ import com.nlf.mini.App;
 import com.nlf.mini.Bean;
 import com.nlf.mini.dao.exception.DaoException;
 import com.nlf.mini.dao.executer.AbstractDaoExecuter;
+import com.nlf.mini.logger.ILogger;
+import com.nlf.mini.logger.LoggerFactory;
 import com.nlf.mini.util.IOUtil;
 import com.nlf.mini.util.StringUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.*;
@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
  */
 public abstract class AbstractSqlExecuter extends AbstractDaoExecuter implements ISqlExecuter{
 
-  private static final Logger logger = LoggerFactory.getLogger(AbstractSqlExecuter.class);
+  private static final ILogger logger = LoggerFactory.getLogger(AbstractSqlExecuter.class);
 
   /** 最近一次操作生成的SQL语句 */
   protected String sql;

@@ -1,15 +1,12 @@
 package com.nlf.mini.extend.dao.sql.dbType.common;
 
+import com.nlf.mini.App;
 import com.nlf.mini.Bean;
 import com.nlf.mini.dao.exception.DaoException;
 import com.nlf.mini.dao.paging.PageData;
 import com.nlf.mini.extend.dao.sql.*;
-import com.nlf.mini.App;
-import com.nlf.mini.extend.dao.sql.AbstractSqlExecuter;
-import com.nlf.mini.extend.dao.sql.ISqlJoiner;
-import com.nlf.mini.extend.dao.sql.ISqlSelecter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.nlf.mini.logger.ILogger;
+import com.nlf.mini.logger.LoggerFactory;
 
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +19,7 @@ import java.util.List;
  */
 public class ASqlSelecter extends AbstractSqlExecuter implements ISqlSelecter {
 
-  private static final Logger logger = LoggerFactory.getLogger(ASqlSelecter.class);
+  private static final ILogger logger = LoggerFactory.getLogger(ASqlSelecter.class);
 
   protected ISqlJoiner joiner;
 

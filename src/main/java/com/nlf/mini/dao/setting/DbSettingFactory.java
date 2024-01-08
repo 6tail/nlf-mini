@@ -4,8 +4,8 @@ import com.nlf.mini.App;
 import com.nlf.mini.dao.DaoType;
 import com.nlf.mini.dao.exception.DaoException;
 import com.nlf.mini.dao.setting.impl.DefaultDbSettingComparator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.nlf.mini.logger.ILogger;
+import com.nlf.mini.logger.LoggerFactory;
 
 import java.util.*;
 
@@ -16,7 +16,7 @@ import java.util.*;
  */
 public class DbSettingFactory {
 
-  private static final Logger logger = LoggerFactory.getLogger(DbSettingFactory.class);
+  private static final ILogger logger = LoggerFactory.getLogger(DbSettingFactory.class);
 
   /**
    * 默认的DB配置排序比较器

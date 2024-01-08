@@ -3,8 +3,8 @@ package com.nlf.mini.dao.connection;
 import com.nlf.mini.App;
 import com.nlf.mini.dao.exception.DaoException;
 import com.nlf.mini.dao.setting.IDbSetting;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.nlf.mini.logger.ILogger;
+import com.nlf.mini.logger.LoggerFactory;
 
 import java.util.Set;
 
@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public abstract class AbstractConnectionProvider implements IConnectionProvider {
 
-  private static final Logger logger = LoggerFactory.getLogger(AbstractConnectionProvider.class);
+  private static final ILogger logger = LoggerFactory.getLogger(AbstractConnectionProvider.class);
 
   /**
    * 已注册驱动
