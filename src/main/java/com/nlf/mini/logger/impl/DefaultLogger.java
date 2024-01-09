@@ -34,22 +34,16 @@ public class DefaultLogger extends AbstractLogger {
 
   @Override
   public void debug(String s) {
-    if (enable) {
-      System.out.println(App.getProperty("nlf.log.default.debug", DateUtil.ymdhms(DateUtil.now()), name, findStackTrace(), s));
-    }
+    System.out.println(App.getProperty("nlf.log.default.debug", DateUtil.ymdhms(DateUtil.now()), name, findStackTrace(), s));
   }
 
   @Override
   public void info(String s) {
-    if (enable) {
-      System.out.println(App.getProperty("nlf.log.default.info", DateUtil.ymdhms(DateUtil.now()), name, findStackTrace(), s));
-    }
+    System.out.println(App.getProperty("nlf.log.default.info", DateUtil.ymdhms(DateUtil.now()), name, findStackTrace(), s));
   }
 
   @Override
   public void warn(String s) {
-    if (enable) {
-      System.out.println(App.getProperty("nlf.log.default.warn", DateUtil.ymdhms(DateUtil.now()), name, findStackTrace(), s));
-    }
+    System.out.println(App.getProperty("nlf.log.default.warn", DateUtil.ymdhms(DateUtil.now()), name, findStackTrace(), s));
   }
 }

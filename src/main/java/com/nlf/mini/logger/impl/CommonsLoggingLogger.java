@@ -25,7 +25,7 @@ public class CommonsLoggingLogger extends AbstractLogger {
 
   @Override
   public void debug(String s) {
-    if (enable && null != logger) {
+    if (null != logger) {
       try {
         Method m = logger.getClass().getMethod("debug", Object.class);
         m.invoke(logger, s);
@@ -37,7 +37,7 @@ public class CommonsLoggingLogger extends AbstractLogger {
 
   @Override
   public void info(String s) {
-    if (enable && null != logger) {
+    if (null != logger) {
       try {
         Method m = logger.getClass().getMethod("info", Object.class);
         m.invoke(logger, s);
@@ -49,7 +49,7 @@ public class CommonsLoggingLogger extends AbstractLogger {
 
   @Override
   public void warn(String s) {
-    if (enable && null != logger) {
+    if (null != logger) {
       try {
         Method m = logger.getClass().getMethod("warn", Object.class);
         m.invoke(logger, s);
